@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% load humanize %}
 
 {% block content %}
 
@@ -9,19 +10,36 @@
         <!-- Single Product Thumb -->
         <div class="single_product_thumb clearfix">
             <div class="product_thumbnail_slides owl-carousel">
-                <img src="img/product-img/product-big-1.jpg" alt="">
-                <img src="img/product-img/product-big-2.jpg" alt="">
-                <img src="img/product-img/product-big-3.jpg" alt="">
+                <img src="{{ product.photo_main_1.url }}" alt="">
+                <img src="{{ product.photo_main_2.url }}" alt="">
+                <!-- <img src="{{ product.photo_1.url }}" alt=""> -->
+                
+                <img src="{% if product.photo_1 %} 
+                    {{product.photo_1}}
+                        {% endif %}" alt="">
+
+                {% if photo.photo_2 %}
+                    <img src="{{ product.photo_2.url }}" alt="">
+                {% endif %}
+
+                {% if photo.photo_3 %}
+                    <img src="{{ product.photo_3.url }}" alt="">
+                {% endif %}
+
+                {% if photo.photo_4 %}
+                    <img src="{{ product.photo_4.url }}" alt="">
+                {% endif %}
             </div>
         </div>
     
         <!-- Single Product Description -->
         <div class="single_product_desc clearfix">
-            <span>mango</span>
+            <span>{{ product.category }}</span>
             <a href="cart.html">
-                <h2>One Shoulder Glitter Midi Dress</h2>
+                <h2>{{ product.title }}</h2>
             </a>
-            <p class="product-price"><span class="old-price">$65.00</span> $49.00</p>
+            <p class="product-price"><span class="old-price"><span>&#8377;</span>{{ product.MRP | intcomma }}</span></span> 
+                <span>&#8377;</span>{{ product.actual_price | intcomma }}</p>
             <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus
                 velit id urna vehicula, nec maximus est sollicitudin.</p>
     
