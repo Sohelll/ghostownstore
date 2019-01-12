@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb_area bg-img" style="background-image: url({% static 'img/bg-img/breadcumb.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Register/Sign-up</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Checkout Area Start ##### -->
+    <div class="checkout_area section-padding-80">
+        <div class="d-flex justify-content-center align-items-center container">
+            <div class="row">
+    
+                <div class="col-sm-6 offset-sm-3 text-center">
+                    <div class="checkout_details_area mt-50 clearfix">
+    
+                        <div class="cart-page-heading mb-30">
+                            <h5>Enter Details</h5>
+                        </div>
+    
+                        <form action="{% url 'register' %}" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="first_name">First Name <span>*</span></label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" value="" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="last_name">Last Name <span>*</span></label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" value="" required>
+                                </div>                                                                
+                                <div class="col-12 mb-3">
+                                    <label for="street_address">Address <span>*</span></label>
+                                    <input type="text" class="form-control mb-3" id="street_address" name="address" value="">                                    
+                                </div>                                                                                                
+                                <div class="col-12 mb-3">
+                                    <label for="phone_number">Phone No <span>*</span></label>
+                                    <input type="number" class="form-control" id="phone_number" name="ph_num" min="0" value="">
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="email_address">Email Address <span>*</span></label>
+                                    <input type="email" class="form-control" id="email_address" value="">
+                                </div>    
+                                <div class="col-12 mb-4">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="password2">Confirm Password</label>
+                                    <input type="password" name="password2" class="form-control" required>      
+                                    <br> <br> <br>                                                             
+                                    <input type="submit" value="Register" class="btn btn-danger btn-block">
+                                </div>
+                            </div>  
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Checkout Area End ##### -->
+{% endblock %}
