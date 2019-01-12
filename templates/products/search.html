@@ -9,7 +9,7 @@
             <div class="row h-100 align-items-center">  
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>all products</h2>
+                        <h2>search results: </h2>
                     </div>
                 </div>
             </div>
@@ -37,17 +37,17 @@
                                     <!-- Sorting -->
                                     {% if products %}
                                         <div class="product-sorting d-flex">
-                                        <p>Sort by:</p>
-                                        <form action="#" method="get">
-                                            <select name="select" id="sortByselect">
-                                                <option value="value">Highest Rated</option>
-                                                <option value="value">Newest</option>
-                                                <option value="value">Price: $$ - $</option>
-                                                <option value="value">Price: $ - $$</option>
-                                            </select>
-                                            <input type="submit" class="d-none" value="">
-                                        </form>
-                                    </div>
+                                            <p>Sort by:</p>
+                                            <form action="#" method="get">
+                                                <select name="select" id="sortByselect">
+                                                    <option value="value">Highest Rated</option>
+                                                    <option value="value">Newest</option>
+                                                    <option value="value">Price: $$ - $</option>
+                                                    <option value="value">Price: $ - $$</option>
+                                                </select>
+                                                <input type="submit" class="d-none" value="">
+                                            </form>
+                                        </div>
                                     {% endif %}
                                 </div>
                             </div>
