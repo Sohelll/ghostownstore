@@ -32,6 +32,7 @@
                             </div>
                         </div>
                     </div>
+                    <br>
                 {% endfor %}
             </div>
         </div>
@@ -92,7 +93,7 @@
                                     <div class="product-description">
                                         <span>{{ p.category }}</span>
                                         <a href="{% url 'product' p.id %}">
-                                            <h6>{{ p.title }}</h6>
+                                            <h6>{{ p.title }} ({{ p.product_code }})</h6>
                                         </a>
                                         <p class="product-price"><span>&#8377;</span>{{ p.actual_price }}</p>
                                 
