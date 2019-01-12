@@ -13,6 +13,9 @@ class Category(models.Model):
     def __str__(self):
         return self.category
 
+    # def __id__(self):
+    #     return self.id
+
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=200)

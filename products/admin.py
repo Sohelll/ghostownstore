@@ -11,5 +11,10 @@ class ProductAdmin(admin.ModelAdmin):
                      'price',)
     list_per_page = 20
 
-admin.site.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'category', 'has_img',)
+    list_display_links = ('id', 'category')
+    list_per_page = 20
+
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)

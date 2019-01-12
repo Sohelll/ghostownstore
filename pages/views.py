@@ -4,7 +4,7 @@ from products.models import Product, Category
 
 def index(request):
     products = Product.objects.order_by('-list_date').filter(is_published=True)
-    cat = Category.objects.all().filter(has_img=True)[:3]
+    cat = Category.objects.order_by('id')
 
     context = {
         'products' : products,
