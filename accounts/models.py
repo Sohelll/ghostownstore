@@ -7,7 +7,8 @@ class UserProfileInfo(models.Model):
 
     #additional 
     address = models.CharField(max_length=200)
-    phone_num = models.CharField(max_length=10)
+    phone_num = models.CharField(max_length=15)
+    phone_num_2 = models.CharField(max_length=15, blank=True)
 
     profile_pic = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
 

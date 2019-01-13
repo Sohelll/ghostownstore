@@ -25,10 +25,11 @@
                     <div class="mt-50 clearfix">
     
                         <div class="cart-page-heading mb-30">
+                        {% include 'partials/_alerts.html' %}
                             <h5>Enter Details</h5>
                         </div>
     
-                        <form action="{% url 'register' %}" method="post">
+                        <form enctype="multipart/form-data" action="{% url 'register' %}" method="post">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -38,7 +39,11 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="last_name">Last Name <span>*</span></label>
                                     <input type="text" class="form-control" id="last_name" name="last_name" value="" required>
-                                </div>                                                                
+                                </div>   
+                                 <div class="col-12 mb-3">
+                                    <label for="first_name">Username<span>*</span></label>
+                                    <input type="text" class="form-control" id="first_name" name="username" value="" required>
+                                </div>                                                             
                                 <div class="col-12 mb-3">
                                     <label for="street_address">Address <span>*</span></label>
                                     <input type="text" class="form-control mb-3" id="street_address" name="address" value="">                                    
@@ -47,9 +52,13 @@
                                     <label for="phone_number">Phone No <span>*</span></label>
                                     <input class="form-control" id="phone_number" name="ph_num" value="">
                                 </div>
+                                <div class="col-12 mb-3">
+                                    <label for="phone_number_2">Phone No (optional)<span>*</span></label>
+                                    <input class="form-control" id="phone_number" name="ph_num_2" value="">
+                                </div>
                                 <div class="col-12 mb-4">
                                     <label for="email_address">Email Address <span>*</span></label>
-                                    <input type="email" class="form-control" id="email_address" value="">
+                                    <input type="email" class="form-control" id="email_address" name="email" value="">
                                 </div>    
                                 <div class="col-12 mb-4">
                                     <label for="password">Password</label>
@@ -57,10 +66,17 @@
                                 </div>
                                 <div class="col-12 mb-4">
                                     <label for="password2">Confirm Password</label>
-                                    <input type="password" name="password2" class="form-control" required>      
+                                    <input type="password" name="password2" class="form-control" required>                        
+                                </div>
+                                <div class="col-12 mb-4">                                     
+                                    <label for="profile_pic">Profile Pic (optional)</label>
+                                    <p>
+                                        <input type="file" name="profile_pic">
+                                    </p>     
                                     <br> <br> <br>                                                             
                                     <input type="submit" value="Register" class="btn btn-danger btn-block">
                                 </div>
+                                
                             </div>  
                             
                         </form>
