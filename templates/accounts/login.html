@@ -1,6 +1,51 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 {% include 'partials/_alerts.html' %}
-<h1>login</h1>
+<br><br>
+<!-- ##### Breadcumb Area Start ##### -->
+<div class="breadcumb_area bg-img" style="background-image: url({% static 'img/bg-img/breadcumb.jpg' %});">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="page-title text-center">
+                    <h2>Login</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcumb Area End ##### -->
+<!-- asking for register -->
+
+
+
+<div class="col-sm-6 offset-sm-3 text-center">
+    <div class="mt-50 clearfix">
+        <p>Don't have an account? Register here --> <a href="{% url 'register' %}"><button class="btn btn-success">Register</button></a></p>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-8 offset-md-2 mb-3">
+                    <label for="username">Username <span>*</span></label>
+                    <input type="text" class="form-control" id="first_name" name="username" value="" required>
+                </div>
+                <br>
+                <div class="col-md-8 offset-md-2 mb-3">
+                    <label for="password">Password <span>*</span></label>
+                    <input type="password" class="form-control" id="password" name="password" value="" required>
+                </div>
+                <br> <br> <br>
+                <div class="col-md-3 offset-md-4 col-6 offset-3 col-lg-3 offset-lg-5">
+                    <input type="submit" value="Login" class="btn btn-danger btn-block">
+                </div>                
+                <br><br>
+            </div>
+        </form>
+        <br><br><br>
+    </div>
+
+</div>
+
 {% endblock %}

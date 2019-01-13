@@ -3,6 +3,19 @@ from .models import UserProfileInfo, User
 from django.contrib import messages, auth
 
 def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, 'You are now logged in')
+            return redirect('index')
+        else:
+            messages.error(request, 'You entered wrong username or password')
+            return redirect('login')
     return render(request, 'accounts/login.html')
 
 
@@ -57,6 +70,8 @@ def register(request):
 
 
 def logout(request):
+    auth.logout(request)
+    messages.success(request, 'You are now logged out')
     return redirect('index')
 
 
