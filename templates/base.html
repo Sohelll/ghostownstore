@@ -41,6 +41,29 @@
     <script src="{% static 'js/classy-nav.min.js' %}"></script>
     <!-- Active js -->
     <script src="{% static 'js/active.js' %}"></script>
+
+    <script>
+    $(".addtocart").click(function () {
+      var product_id = $(this).attr("id")
+      console.log(product_id)
+
+      $.ajax({
+        url: 'ajax/add_to_cart',
+        data: {
+          'product_id': product_id
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+    });
+  </script>
+
+    {% block javascript %}
+    {% endblock %}
     
 </body>
 </html>

@@ -82,9 +82,11 @@
                 </form>
             </div>
             <!-- Favourite Area -->
-            <div class="favourite-area">
-                <a href="#"><img src="{% static 'img/core-img/heart.svg' %}" alt=""></a>
-            </div>
+            {% if user.is_authenticated %}
+                <div class="favourite-area">
+                    <a href="#"><img src="{% static 'img/core-img/heart.svg' %}" alt=""></a>
+                </div>
+            {% endif %}
             <!-- User Login Info -->
             <div class="user-login-info">
             {% if user.is_authenticated %}

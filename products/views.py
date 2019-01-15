@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import JsonResponse
 
 
 def index(request):
@@ -60,3 +61,10 @@ def cat_wise(request, category_id):
         'len' : count
     }
     return render(request, 'products/cat_wise.html', context)
+
+def add_to_cart(request):
+    p_id = request.GET['product_id']
+    print(p_id)
+    dat = {}
+    
+    return JsonResponse(dat)
