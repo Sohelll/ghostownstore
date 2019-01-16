@@ -15,10 +15,12 @@ def login(request):
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
             
+            global active_ac
             active_ac = user.id
-            print('-'*40)
+
+            print('*'*40)
             print(active_ac)
-            print('-'*40)
+            print('*'*40)
             return redirect('index')
         else:
             messages.error(request, 'You entered wrong username or password')
@@ -79,6 +81,8 @@ def register(request):
 def logout(request):
     auth.logout(request)
     messages.success(request, 'You are now logged out')
+
+    global active_ac
     active_ac = -17
     return redirect('index')
 
@@ -87,4 +91,5 @@ def dashboard(request):
     return render(request, 'pages/dashboard.html')
 
 def active_user():
+    global active_ac
     return active_ac

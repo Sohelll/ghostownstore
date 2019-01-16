@@ -14,7 +14,7 @@ def cart_processor(request):
 
         print('-'*50)
         print(count)
-        print('ac value {}'.format(act_user_ac))
+        print('ac gave this {}'.format(act_user_ac))
         print(cart_item)
         print('-'*50)
 
@@ -24,13 +24,13 @@ def cart_processor(request):
         }
         return context
     
-    elif(act_user_pr != 0):
-        cart_item = Cart.objects.filter(user_id=act_user_pr)
+    elif(act_user_ac == -17):
+        cart_item = Cart.objects.filter(user_id=act_user_ac)
         count = cart_item.count()
 
         print('-'*50)
         print(count)
-        print('pr gave this {}'.format(act_user_pr))
+        print('ac logout gave this {}'.format(act_user_ac))
         print(cart_item)
         print('-'*50)
 
@@ -40,8 +40,14 @@ def cart_processor(request):
         }
         return context
     else:
-        cart_item = Cart.objects.filter(user_id=act_user_ac)
+        cart_item = Cart.objects.filter(user_id=act_user_pr)
         count = cart_item.count()
+
+        print('-'*50)
+        print(count)
+        print('pr gave this {}'.format(act_user_pr))
+        print(cart_item)
+        print('-'*50)
 
         context = {
             'cart_item': cart_item,
