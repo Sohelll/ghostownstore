@@ -18,53 +18,23 @@
                 </div>
                 <!-- Nav Start -->
                 <div class="classynav">
-                    <ul>
-                        <li><a href="{% url 'products' %}">Shop</a>
-                            <div class="megamenu">
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Women's Collection</li>
-                                    <li><a href="shop.html">Dresses</a></li>
-                                    <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                    <li><a href="shop.html">T-shirts</a></li>
-                                    <li><a href="shop.html">Rompers</a></li>
-                                    <li><a href="shop.html">Bras &amp; Panties</a></li>
-                                </ul>
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Men's Collection</li>
-                                    <li><a href="shop.html">T-Shirts</a></li>
-                                    <li><a href="shop.html">Polo</a></li>
-                                    <li><a href="shop.html">Shirts</a></li>
-                                    <li><a href="shop.html">Jackets</a></li>
-                                    <li><a href="shop.html">Trench</a></li>
-                                </ul>
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Kid's Collection</li>
-                                    <li><a href="shop.html">Dresses</a></li>
-                                    <li><a href="shop.html">Shirts</a></li>
-                                    <li><a href="shop.html">T-shirts</a></li>
-                                    <li><a href="shop.html">Jackets</a></li>
-                                    <li><a href="shop.html">Trench</a></li>
-                                </ul>
-                                <div class="single-mega cn-col-4">
-                                    <img src="{% static 'img/bg-img/bg-6.jpg' %}" alt="">
-                                </div>
-                            </div>
-                        </li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="{% url 'index' %}">Home</a></li>
-                                <li><a href="{% url 'products' %}">Shop</a></li>
-                                <li><a href="{% url 'login' %}">Login</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                {% comment %} <li><a href="blog.html">Blog</a></li> {% endcomment %}
-                                <li><a href="{% url 'logout' %}">Logout</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a href="{% url 'about' %}">About</a></li>
-                            </ul>
-                        </li>
-                        {% comment %} <li><a href="blog.html">Blog</a></li> {% endcomment %}
+                    <ul>                    
+                        <li><a href="{% url 'products' %}">Shop</a></li> 
+                        {% if user.is_authenticated %}                               
+                        <li><a href="{% url 'checkout' user.id %}">Checkout</a></li>
+                        {% else %}                                
+                        <li><a href="{% url 'checkout_tologin' %}">Checkout</a></li>
+                        {% endif %}
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}                              
+                                
+                        </li>       
+                        
                     </ul>
                 </div>
                 <!-- Nav End -->

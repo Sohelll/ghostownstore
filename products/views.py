@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product, Category
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import JsonResponse, HttpResponse
-from accounts.models import User, Cart
+from accounts.models import User, Cart, UserProfileInfo
 from django.core import serializers
+from django.contrib import messages
 
 active_pr = 0
 
@@ -142,13 +143,34 @@ def delete_from_cart(request):
         return JsonResponse(data)
 
 
-def checkout(request):
+def checkout(request, user_id):
 
-    return
+    user_products = Cart.objects.filter(user_id=user_id)
+    user_det = UserProfileInfo.objects.filter(user=user_id)[0]
+
+    total = 0
+
+    for p in user_products:
+        total += p.cart_product.actual_price       
+
+    context = {
+        'user_products': user_products,
+        'user_det': user_det,
+        'total' : total
+    }    
+
+    return render(request, 'products/checkout.html', context)
+
+
 
 def checkout_single(request, product_id):
-    return
+    return render(request, 'products/checkout.html')
+
+def checkout_tologin(request):
+    messages.success(request, 'Please login first')
+    return redirect('login')
 
 def active_user_ajax():
     global active_pr
     return active_pr
+
