@@ -1,17 +1,12 @@
 {% load static %}
 <!-- ##### Right Side Cart Area ##### -->
-{% block javascript %}
-    <script>
-        $('#emptyCart').html('cart is empty');
-    </script>
-{% endblock %}
 <div class="cart-bg-overlay"></div>
 
 <div class="right-side-cart-area">
 
     <!-- Cart Button -->
     <div class="cart-button">
-        <a href="#" id="rightSideCart"><img src="{% static 'img/core-img/bag.svg' %}" alt=""> <span>3</span></a>
+        <a href="#" id="rightSideCart"><img src="{% static 'img/core-img/bag.svg' %}" alt=""> <span id="cart_count_inner">{{len_cart}}</span></a>
     </div>
 
     <div class="cart-content d-flex">
@@ -21,7 +16,7 @@
             <!-- Single Cart Item -->
             {% if cart_item %}
                 {% for c in cart_item %}                    
-                    <div class="single-cart-item">
+                    <div class="single-cart-item to_hide delete" id="{{c.cart_product.id}}">
                          <a href="#" class="product-image">
                          <img src="{{ c.cart_product.photo_main_1.url }}" class="cart-thumb" alt="">
                      <!-- Cart Item Desc -->
@@ -38,41 +33,6 @@
             {% else %}
                     <p class="price">Cart is empty</p>
             {% endif %}
-                
-
-            
-
-            {% comment %} <!-- Single Cart Item -->
-            <div class="single-cart-item">
-                <a href="#" class="product-image">
-                    <img src="{% static 'img/product-img/product-2.jpg' %}" class="cart-thumb" alt="">
-                    <!-- Cart Item Desc -->
-                    <div class="cart-item-desc">
-                        <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                        <span class="badge">Mango</span>
-                        <h6>Button Through Strap Mini Dress</h6>
-                        <p class="size">Size: S</p>
-                        <p class="color">Color: Red</p>
-                        <p class="price">$45.00</p>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Single Cart Item -->
-            <div class="single-cart-item">
-                <a href="#" class="product-image">
-                    <img src="{% static 'img/product-img/product-3.jpg' %}" class="cart-thumb" alt="">
-                    <!-- Cart Item Desc -->
-                    <div class="cart-item-desc">
-                        <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                        <span class="badge">Mango</span>
-                        <h6>Button Through Strap Mini Dress</h6>
-                        <p class="size">Size: S</p>
-                        <p class="color">Color: Red</p>
-                        <p class="price">$45.00</p>
-                    </div>
-                </a>
-            </div> {% endcomment %}
         </div>
 
         <!-- Cart Summary -->

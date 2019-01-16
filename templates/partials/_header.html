@@ -82,11 +82,11 @@
                 </form>
             </div>
             <!-- Favourite Area -->
-            {% if user.is_authenticated %}
+            {% comment %} {% if user.is_authenticated %}
                 <div class="favourite-area">
                     <a href="#"><img src="{% static 'img/core-img/heart.svg' %}" alt=""></a>
                 </div>
-            {% endif %}
+            {% endif %} {% endcomment %}
             <!-- User Login Info -->
             <div class="user-login-info">
             {% if user.is_authenticated %}
@@ -97,7 +97,7 @@
             </div>
             <!-- Cart Area -->
             <div class="cart-area">
-                <a href="#" id="essenceCartBtn"><img src="{% static 'img/core-img/bag.svg' %}" alt=""> <span>3</span></a>
+                <a href="#" id="essenceCartBtn"><img src="{% static 'img/core-img/bag.svg' %}" alt=""> <span id="cart_count_outer">{{len_cart}}</span></a>
             </div>
         </div>
 

@@ -1,55 +1,57 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>{{user.username}}GHOSTOWNSTORE</title>
+  <title>GHOSTOWNSTORE | {% block title %}{% endblock %}}</title>
 
-    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
-    
-    <!-- Core Style CSS -->
-    <link rel="stylesheet" href="{% static 'css/core-style.css' %}">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+  <!-- Core Style CSS -->
+  <link rel="stylesheet" href="{% static 'css/core-style.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
+
 <body>
   {% for c in cart_item %}
-    <h1>
-      
-      {{c}}
-      
-    </h1>
-    {% endfor %}
+  <h4>
 
-    <!-- HEADER PARTIALS HERE -> -->
-    {% include 'partials/_header.html' %}    
+    {{c}}
 
-    <!-- MAIN CONTENT -->
-    {% block content %}
-    {% endblock %}
+  </h4>
+  {% endfor %}
 
-    <!-- FOOTER PARTIALS HERE -> -->
-    {% include 'partials/_footer.html' %}
-    
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
-    <!-- Popper js -->
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <!-- Bootstrap js -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- Plugins js -->
-    <script src="{% static 'js/plugins.js' %}"></script>
-    <!-- Classy Nav js -->
-    <script src="{% static 'js/classy-nav.min.js' %}"></script>
-    <!-- Active js -->
-    <script src="{% static 'js/active.js' %}"></script>
+  <!-- HEADER PARTIALS HERE -> -->
+  {% include 'partials/_header.html' %}
 
-    <script>
+  <!-- MAIN CONTENT -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- FOOTER PARTIALS HERE -> -->
+  {% include 'partials/_footer.html' %}
+
+  <!-- jQuery (Necessary for All JavaScript Plugins) -->
+  <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+  <!-- Popper js -->
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <!-- Bootstrap js -->
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- Plugins js -->
+  <script src="{% static 'js/plugins.js' %}"></script>
+  <!-- Classy Nav js -->
+  <script src="{% static 'js/classy-nav.min.js' %}"></script>
+  <!-- Active js -->
+  <script src="{% static 'js/active.js' %}"></script>
+
+  <script>
     $(".addtocart").click(function () {
       var product_id = $(this).attr("id");
       var uid = {{user.id}};
@@ -59,20 +61,62 @@
         url: 'ajax/add_to_cart',
         data: {
           'product_id': product_id,
-          'userid' : uid,
+          'userid': uid,
         },
         dataType: 'json',
-        success: function () {
+        success: function (data) {
           if (data) {
-            alert("A user with this username already exists.");
+            console.log(data.msg);
+          }
+          if (data.change){
+            var n = $('#cart_count_inner').text();
+            n++;
+            $('#cart_count_inner').html(n);
+            $('#cart_count_outer').html(n);
           }
         }
       });
+
+      
     });
+
+$(".delete").click(function () {
+  var product_id = $(this).attr("id");
+  var uid = {{user.id}};
+  var cart_product = product_id+uid;
+
+  $.ajax({
+    url: 'ajax/delete_from_cart',
+    data: {
+    'product_id': product_id,
+    'userid': uid,    
+  },
+  dataType: 'json',
+    success: function (data) {
+      if (data) {
+        console.log('deleted '+cart_product+ ' from cart');
+      }
+      if(data.change){
+        var n = $('#cart_count_inner').text();
+        n--;
+        $('#cart_count_inner').html(n);
+        $('#cart_count_outer').html(n);
+      }
+    }
+  });
+  var it = product_id+uid;
+
+  
+  
+  $(this).remove();
+});
+
+    
   </script>
 
-    {% block javascript %}
-    {% endblock %}
-    
+  {% block javascript %}
+  {% endblock %}
+
 </body>
+
 </html>

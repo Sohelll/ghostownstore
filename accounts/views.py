@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .models import UserProfileInfo, User
 from django.contrib import messages, auth
 
-active = 0
+active_ac = 0
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -13,10 +14,10 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
-            global active
-            active = user.id
+            
+            active_ac = user.id
             print('-'*40)
-            print(active)
+            print(active_ac)
             print('-'*40)
             return redirect('index')
         else:
@@ -49,7 +50,7 @@ def register(request):
                     return redirect('register')
                 else:
                     #looks good
-                    user = User.objects.create(username=username, password=password, email=email,
+                    user = User.objects.create_user(username=username, password=password, email=email,
                                                first_name=first_name, last_name=last_name) 
                     user.save()
 
@@ -78,8 +79,7 @@ def register(request):
 def logout(request):
     auth.logout(request)
     messages.success(request, 'You are now logged out')
-    global active
-    active = 0
+    active_ac = -17
     return redirect('index')
 
 
@@ -87,5 +87,4 @@ def dashboard(request):
     return render(request, 'pages/dashboard.html')
 
 def active_user():
-    global active
-    return active
+    return active_ac

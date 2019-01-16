@@ -5,11 +5,13 @@ from django.http import JsonResponse, HttpResponse
 from accounts.models import User, Cart
 from django.core import serializers
 
+active_pr = 0
+
 def index(request):
 
     # latest first
     # products = Product.objects.order_by('-list_date').filter(is_published=True)
-    products = Product.objects.all().filter(is_published=True)  #take all of them for now!
+    products = Product.objects.order_by('-list_date').filter(is_published=True)  #take all of them for now!
     count = len(products)   #number of products fetched
 
     paginator = Paginator(products, 6)
@@ -54,11 +56,7 @@ def cat_wise(request, category_id):
     cat = get_object_or_404(Category, pk=category_id)
 
     products = Product.objects.order_by('-list_date').filter(category=category_id)
-    count = len(products)
-
-    print('-'*30)
-    print(products)
-    print('-'*30)
+    count = products.count()
 
     context = {
         'cat' : cat,
@@ -71,19 +69,24 @@ def add_to_cart(request):
     p_id = request.GET['product_id']
     u_id = request.GET['userid']
     active_user_id = u_id
+
+    global active_pr
+    active_pr = u_id
+
     print(p_id)
     print(u_id)
 
     item_exists = Cart.objects.filter(user_id=u_id, cart_product_id=p_id).exists()
     if item_exists:
         users_cart = Cart.objects.filter(user_id=u_id)
-        print('-'*30)
-        print(users_cart)
-        print('-'*30)
+        products_in_cart = users_cart.count()
 
-        response = serializers.serialize("json", users_cart)
-        print(response)
-        return HttpResponse(response, content_type='application/json')    
+        data = {
+            'msg': 'Already in the cart',
+            'change' : False,
+            'products_in_cart' : products_in_cart,
+        }
+        return JsonResponse(data)    
     else:
         user_instance = User(id=u_id)       #Adding instances to cart fields
         product_instance = Product(id=p_id) #same here
@@ -91,10 +94,61 @@ def add_to_cart(request):
 
         car_t.save()
 
-        users_cart = Cart.objects.filter(user_id=u_id)      #fetching current user's cart
+        users_cart = Cart.objects.filter(user_id=u_id)
+        products_in_cart = users_cart.count()
+
         data = {
-            'users_cart': str(users_cart)
+            'msg': 'item added to cart',
+            'products_in_cart': products_in_cart,
+            'change': True,
         }
 
-        return JsonResponse(data, safe=False)
+        return JsonResponse(data)
 
+
+def delete_from_cart(request):
+    p_id = request.GET['product_id']
+    u_id = request.GET['userid']
+
+    global active_pr
+    active_pr = u_id
+    print(p_id)
+    print(u_id)
+
+    item_exists = Cart.objects.filter(
+        user_id=u_id, cart_product_id=p_id).exists()
+    if item_exists:
+        del_item = Cart.objects.filter(
+            user_id=u_id, cart_product_id=p_id)
+
+        del_item.delete()
+
+        users_cart = Cart.objects.filter(user_id=u_id)
+        products_in_cart = users_cart.count()
+
+        data = {
+            'msg': 'item deleted from cart',
+            'products_in_cart': products_in_cart,
+            'change': True,
+        }
+        return JsonResponse(data)
+    else:
+
+        data = {
+            'msg': 'item already deleted',
+            'change': False,
+        }
+
+        return JsonResponse(data)
+
+
+def checkout(request):
+
+    return
+
+def checkout_single(request, product_id):
+    return
+
+def active_user_ajax():
+    global active_pr
+    return active_pr

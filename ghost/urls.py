@@ -25,4 +25,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('ajax/add_to_cart', views.add_to_cart, name='add_to_cart'),
+    path('ajax/delete_from_cart', views.delete_from_cart, name='delete_from_cart'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
