@@ -60,11 +60,14 @@
                 <!-- Cart & Favourite Box -->
                 <div class="cart-fav-box d-flex align-items-center">
                     <!-- Cart -->
-                    <a href="#" class="btn essence-btn addtocart" id="{{product.id}}">Add to cart</a>
+                    {% if user.is_authenticated %}
+                        
+                        <a href="#" class="btn essence-btn addtocart" id="{{product.id}}">Add to cart</a>
+                    {% endif %}                
                     <!-- Favourite -->
-                    <div class="product-favourite ml-4">
+                    {% comment %} <div class="product-favourite ml-4">
                         <a href="#" class="favme fa fa-heart"></a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </form>
             <br>

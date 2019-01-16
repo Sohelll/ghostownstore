@@ -88,9 +88,12 @@
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
+                                                    {% if user.is_authenticated %}
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn addtocart" id="{{p.id}}">Add to Cart</a>
                                                     </div>
+                                                    {% endif %}
+                                                    
                                                 </div>
                                             </div>
                                         </div>

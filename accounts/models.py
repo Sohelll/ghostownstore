@@ -22,5 +22,6 @@ class Cart(models.Model):
     cart_product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username +'-'+ self.cart_product.title
+        return self.user.username + '-' + self.cart_product.title
+
     

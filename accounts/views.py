@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import UserProfileInfo, User
 from django.contrib import messages, auth
 
+active = 0
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -12,6 +13,11 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
+            global active
+            active = user.id
+            print('-'*40)
+            print(active)
+            print('-'*40)
             return redirect('index')
         else:
             messages.error(request, 'You entered wrong username or password')
@@ -72,8 +78,14 @@ def register(request):
 def logout(request):
     auth.logout(request)
     messages.success(request, 'You are now logged out')
+    global active
+    active = 0
     return redirect('index')
 
 
 def dashboard(request):
     return render(request, 'pages/dashboard.html')
+
+def active_user():
+    global active
+    return active

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>GHOSTOWNSTORE</title>
+    <title>{{user.username}}GHOSTOWNSTORE</title>
 
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
     
@@ -18,6 +18,13 @@
 
 </head>
 <body>
+  {% for c in cart_item %}
+    <h1>
+      
+      {{c}}
+      
+    </h1>
+    {% endfor %}
 
     <!-- HEADER PARTIALS HERE -> -->
     {% include 'partials/_header.html' %}    
@@ -44,17 +51,19 @@
 
     <script>
     $(".addtocart").click(function () {
-      var product_id = $(this).attr("id")
-      console.log(product_id)
+      var product_id = $(this).attr("id");
+      var uid = {{user.id}};
+      console.log(product_id + uid);
 
       $.ajax({
         url: 'ajax/add_to_cart',
         data: {
-          'product_id': product_id
+          'product_id': product_id,
+          'userid' : uid,
         },
         dataType: 'json',
-        success: function (data) {
-          if (data.is_taken) {
+        success: function () {
+          if (data) {
             alert("A user with this username already exists.");
           }
         }

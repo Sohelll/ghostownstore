@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import JsonResponse
-
+from django.http import JsonResponse, HttpResponse
+from accounts.models import User, Cart
+from django.core import serializers
 
 def index(request):
 
@@ -55,6 +56,10 @@ def cat_wise(request, category_id):
     products = Product.objects.order_by('-list_date').filter(category=category_id)
     count = len(products)
 
+    print('-'*30)
+    print(products)
+    print('-'*30)
+
     context = {
         'cat' : cat,
         'products' : products,
@@ -64,7 +69,32 @@ def cat_wise(request, category_id):
 
 def add_to_cart(request):
     p_id = request.GET['product_id']
+    u_id = request.GET['userid']
+    active_user_id = u_id
     print(p_id)
-    dat = {}
-    
-    return JsonResponse(dat)
+    print(u_id)
+
+    item_exists = Cart.objects.filter(user_id=u_id, cart_product_id=p_id).exists()
+    if item_exists:
+        users_cart = Cart.objects.filter(user_id=u_id)
+        print('-'*30)
+        print(users_cart)
+        print('-'*30)
+
+        response = serializers.serialize("json", users_cart)
+        print(response)
+        return HttpResponse(response, content_type='application/json')    
+    else:
+        user_instance = User(id=u_id)       #Adding instances to cart fields
+        product_instance = Product(id=p_id) #same here
+        car_t = Cart(user=user_instance, cart_product=product_instance)     #saving as cart item
+
+        car_t.save()
+
+        users_cart = Cart.objects.filter(user_id=u_id)      #fetching current user's cart
+        data = {
+            'users_cart': str(users_cart)
+        }
+
+        return JsonResponse(data, safe=False)
+
