@@ -31,13 +31,15 @@
                     </div>               
                 {% endfor %}
             {% else %}
-                    <h4 style="text-align:center;">
-                        Cart is empty <br>  <hr>
-<p style="text-align:center; font-size:300%;">OR</p> <br>
-<hr>
-                        <br>
-                        REFRESH THE PAGE TO SEE ADDED ITEMS!
+                {% if user.is_authenticated %}
+                        <h4 style="text-align:center;">
+                            Cart is empty <br>  <hr>                        
+                        </h4>
+                {% else %}
+                    <h4 style="text-align-center;">
+                        LOGIN TO SEE THE CART 
                     </h4>
+                {% endif %}
             {% endif %}
         </div>
 
@@ -46,14 +48,16 @@
 
             <h2>Summary</h2>
             <ul class="summary-table">
-                <li><span>subtotal:</span> <span>$274.00</span></li>
-                <li><span>delivery:</span> <span>Free</span></li>
-                <li><span>discount:</span> <span>-15%</span></li>
-                <li><span>total:</span> <span>$232.00</span></li>
+                <li><span>subtotal:</span> <span><span>&#8377;</span> {{subtotal}}</span></li>
+                <li><span>delivery:</span> <span><span>&#8377;</span> {{delivery}}</span></li>
+                
+                <li><span>total:</span> <span><span>&#8377;</span> {{total}}</span></li>
             </ul>
-            <div class="checkout-btn mt-100">
-                <a href="checkout.html" class="btn essence-btn">check out</a>
-            </div>
+            {% if user.is_authenticated %}
+                <div class="checkout-btn mt-100">
+                <a href="{% url 'checkout' user.id %}" class="btn essence-btn">check out</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

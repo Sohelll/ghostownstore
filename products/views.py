@@ -12,7 +12,7 @@ def index(request):
 
     # latest first
     # products = Product.objects.order_by('-list_date').filter(is_published=True)
-    products = Product.objects.order_by('-list_date').filter(is_published=True)  #take all of them for now!
+    products = Product.objects.order_by('list_date').filter(is_published=True)  #take all of them for now!
     count = len(products)   #number of products fetched
 
     paginator = Paginator(products, 6)
@@ -74,9 +74,6 @@ def add_to_cart(request):
     global active_pr
     active_pr = u_id
 
-    print(p_id)
-    print(u_id)
-
     item_exists = Cart.objects.filter(user_id=u_id, cart_product_id=p_id).exists()
     if item_exists:
         users_cart = Cart.objects.filter(user_id=u_id)
@@ -113,8 +110,6 @@ def delete_from_cart(request):
 
     global active_pr
     active_pr = u_id
-    print(p_id)
-    print(u_id)
 
     item_exists = Cart.objects.filter(
         user_id=u_id, cart_product_id=p_id).exists()
@@ -148,14 +143,20 @@ def checkout(request, user_id):
     user_products = Cart.objects.filter(user_id=user_id)
     user_det = UserProfileInfo.objects.filter(user=user_id)[0]
 
-    total = 0
+    subtotal = 0
+    delivery = 0
 
     for p in user_products:
-        total += p.cart_product.actual_price       
+        subtotal += p.cart_product.actual_price       
+        delivery += p.cart_product.delivery_charge
+
+    total = subtotal + delivery
 
     context = {
         'user_products': user_products,
         'user_det': user_det,
+        'subtotal': subtotal,
+        'delivery': delivery,
         'total' : total
     }    
 

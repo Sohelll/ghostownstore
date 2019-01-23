@@ -34,7 +34,8 @@
                                 <div class="product-topbar d-flex align-items-center justify-content-between">
                                     <!-- Total Products -->
                                     <div class="total-products">
-                                        <p><span>{{len}}</span> products found</p>
+                                        
+                                        <p><span>``  {{len}}</span> products found</p>
                                     </div>
                                     <!-- Sorting -->
                                     {% if products %}
@@ -79,7 +80,7 @@
                                             </div>
                                     
                                             <!-- Product Description -->
-                                            <div class="product-description">
+                                            <div class="product-description pad_title">
                                                 <span>{{ p.category }}</span>
                                                 <a href="{% url 'product' p.id %}">
                                                     <h6>{{ p.title }}</h6>

@@ -52,7 +52,8 @@
                         <div class="h-100 d-flex align-items-center justify-content-end">
                             <div class="cta--text">
                                 <h6>-60%</h6>
-                                <h2>Global Sale</h2>
+                                <h2>More Products</h2>
+                                <h2>are</h2>
                                 <a href="#" class="btn essence-btn">Coming Soon</a>
                             </div>
                         </div>
@@ -90,12 +91,10 @@
                                         <!-- Hover Thumb -->
                                         <img class="hover-img" src="{{ p.photo_main_2.url }}" alt="">
                                         <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div> 
+                                        
                                     </div>
                                     <!-- Product Description -->
-                                    <div class="product-description">
+                                    <div class="product-description text-center">
                                         <span>{{ p.category }}</span>
                                         <a href="{% url 'product' p.id %}">
                                             <h6>{{ p.title }} ({{ p.product_code }})</h6>

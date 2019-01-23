@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-  <title>GHOSTOWNSTORE | {% block title %}{% endblock %}</title>
+  <title>STEALDEAL | {% block title %}{% endblock %}</title>
 
   <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
@@ -20,6 +20,7 @@
 </head>
 
 <body>
+<div class="container">
 
   <!-- HEADER PARTIALS HERE -> -->
   {% include 'partials/_header.html' %}
@@ -28,8 +29,7 @@
   {% block content %}
   {% endblock %}
 
-  <!-- FOOTER PARTIALS HERE -> -->
-  {% include 'partials/_footer.html' %}
+ 
 
   <!-- jQuery (Necessary for All JavaScript Plugins) -->
   <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
@@ -67,7 +67,10 @@
             $('#cart_count_inner').html(n);
             $('#cart_count_outer').html(n);
           }
+
+          location.reload();
         }
+        
       });
 
       
@@ -95,6 +98,9 @@ $(".delete").click(function () {
         $('#cart_count_inner').html(n);
         $('#cart_count_outer').html(n);
       }
+      
+        location.reload();
+      
     }
   });
   var it = product_id+uid;
@@ -109,6 +115,11 @@ $(".delete").click(function () {
 
   {% block javascript %}
   {% endblock %}
+
+</div>
+
+<!-- FOOTER PARTIALS HERE -> -->
+{% include 'partials/_footer.html' %}
 
 </body>
 
