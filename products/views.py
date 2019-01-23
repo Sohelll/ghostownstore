@@ -6,8 +6,6 @@ from accounts.models import User, Cart, UserProfileInfo
 from django.core import serializers
 from django.contrib import messages
 
-active_pr = 0
-
 def index(request):
 
     # latest first
@@ -71,9 +69,6 @@ def add_to_cart(request):
     u_id = request.GET['userid']
     active_user_id = u_id
 
-    global active_pr
-    active_pr = u_id
-
     item_exists = Cart.objects.filter(user_id=u_id, cart_product_id=p_id).exists()
     if item_exists:
         users_cart = Cart.objects.filter(user_id=u_id)
@@ -107,9 +102,6 @@ def add_to_cart(request):
 def delete_from_cart(request):
     p_id = request.GET['product_id']
     u_id = request.GET['userid']
-
-    global active_pr
-    active_pr = u_id
 
     item_exists = Cart.objects.filter(
         user_id=u_id, cart_product_id=p_id).exists()
