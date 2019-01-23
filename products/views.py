@@ -67,7 +67,6 @@ def cat_wise(request, category_id):
 def add_to_cart(request):
     p_id = request.GET['product_id']
     u_id = request.GET['userid']
-    active_user_id = u_id
 
     item_exists = Cart.objects.filter(user_id=u_id, cart_product_id=p_id).exists()
     if item_exists:
@@ -163,7 +162,4 @@ def checkout_tologin(request):
     messages.success(request, 'Please login first')
     return redirect('login')
 
-def active_user_ajax():
-    global active_pr
-    return active_pr
 
