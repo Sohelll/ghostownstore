@@ -7,88 +7,93 @@
 {% block content %}
 
     <!-- ##### Single Product Details Area Start ##### -->
-    <section class="single_product_details_area d-flex align-items-center">
+<div class="new_trans row align-items-center">
     
         <!-- Single Product Thumb -->
-        <div class="single_product_thumb clearfix">
-            <div class="product_thumbnail_slides owl-carousel">
-                <img src="{{ product.photo_main_1.url }}" alt="">
-                <img src="{{ product.photo_main_2.url }}" alt="">
-                <!-- <img src="{{ product.photo_1.url }}" alt=""> -->
-                
-                {% if photo.photo_1 %}
-                <img src="{{ product.photo_1.url }}" alt="">
-                {% endif %}
-
-                {% if photo.photo_2 %}
-                    <img src="{{ product.photo_2.url }}" alt="">
-                {% endif %}
-
-                {% if photo.photo_3 %}
-                    <img src="{{ product.photo_3.url }}" alt="">
-                {% endif %}
-
-                {% if photo.photo_4 %}
-                    <img src="{{ product.photo_4.url }}" alt="">
-                {% endif %}
+        <div class="col-md-5">
+            <div class="single_product_thumb clearfix">
+                <div class="product_thumbnail_slides">
+                    <img src="{{ product.photo_main_1.url }}" alt="">
+                    <img src="{{ product.photo_main_2.url }}" alt="">
+                    {% if product.photo_1 %}
+                        <img src="{{ product.photo_1.url }}" alt="">
+                    {% endif %}
+                    {% if product.photo_2 %}
+                        <img src="{{ product.photo_2.url }}" alt="">
+                    {% endif %}
+                    {% if product.photo_3 %}
+                        <img src="{{ product.photo_3.url }}" alt="">
+                    {% endif %}
+                    {% if product.photo_4 %}
+                        <img src="{{ product.photo_4.url }}" alt="">
+                    {% endif %}
+            
+                </div>
             </div>
         </div>
-    
+
         <!-- Single Product Description -->
-        <div class="single_product_desc clearfix">
-            <span>{{ product.category }}</span>            
+        <div class="col-md-7">
+            <div class="single_product_desc clearfix">
+                <span>{{ product.category }}</span>
                 <h2>{{ product.title }}</h2>
-            <p class="product-price"><span class="old-price"><span>&#8377;</span>{{ product.MRP | intcomma }}</span></span> 
-                <span>&#8377;</span>{{ product.actual_price | intcomma }}</p>
+                <p class="product-price"><span id="old_price_cross" class="old-price"><span>&#8377;</span>{{ product.MRP | intcomma }}</span></span>
+                    <span>&#8377;</span>{{ product.actual_price | intcomma }}</p>
             
-    
-            <!-- Form -->
-            <form class="cart-form clearfix" method="post">
-                <!-- Select Box -->
-                {% comment %} <div class="select-box d-flex mt-50 mb-30">
-                    <select name="select" id="productSize" class="mr-5">
-                        <option value="value">Size: XL</option>
-                        <option value="value">Size: X</option>
-                        <option value="value">Size: M</option>
-                        <option value="value">Size: S</option>
-                    </select>
-                    <select name="select" id="productColor">
-                        <option value="value">Color: Black</option>
-                        <option value="value">Color: White</option>
-                        <option value="value">Color: Red</option>
-                        <option value="value">Color: Purple</option>
-                    </select>
-                </div> {% endcomment %}
-                <!-- Cart & Favourite Box -->
-                <div class="cart-fav-box d-flex align-items-center">
-                    <!-- Cart -->
-                    {% if user.is_authenticated %}
-                        
-                        <a href="#" class="btn essence-btn addtocart" id="{{product.id}}">Add to cart</a>
-                    {% endif %}                
-                    <!-- Favourite -->
-                    {% comment %} <div class="product-favourite ml-4">
-                        <a href="#" class="favme fa fa-heart"></a>
-                    </div> {% endcomment %}
-                </div>
-            </form>
-            <br>
-            <p class="product-desc">{{product.description}}</p>
-            <br>
-            <blockquote><h6>
-                Features:
-            </h6></blockquote>
-            <p>
-                {{ product.feature_1 }}
-            </p>
-            <p>
-                {{ product.feature_2 }}
-            </p>
-            <p>
-                {{ product.feature_3 }}
-            </p>
-        </div>
-    </section>
+            
+            
+            
+            
+                <!-- Form -->
+                <form class="cart-form clearfix" method="post">
+                    <!-- Select Box -->
+                    <!-- <div class="select-box d-flex mt-50 mb-30">
+                        <select name="select" id="productSize" class="mr-5">
+                            <option value="value">Size: XL</option>
+                            <option value="value">Size: X</option>
+                            <option value="value">Size: M</option>
+                            <option value="value">Size: S</option>
+                        </select>
+                        <select name="select" id="productColor">
+                            <option value="value">Color: Black</option>
+                            <option value="value">Color: White</option>
+                            <option value="value">Color: Red</option>
+                            <option value="value">Color: Purple</option>
+                        </select>
+                    </div> -->
+                    <!-- Cart & Favourite Box -->
+                    <div class="cart-fav-box d-flex align-items-center">
+                        <!-- Cart -->
+                        {% if user.is_authenticated %}            
+                            <a href="#" class="btn essence-btn addtocart" id="{{product.id}}">Add to cart</a>
+                        {% endif %} 
+                        <!-- Favourite -->
+                        {% comment %} <div class="product-favourite ml-4">
+                            <a href="#" class="favme fa fa-heart"></a>
+                        </div> {% endcomment %}
+                    </div>
+                </form>
+                <br>
+                <p class="product-desc">{{product.description}}</p>
+                <br>
+                                               
+            </div>
+        </div>        
+    </div>
+    <blockquote>
+        <h6>
+            Features:
+        </h6>
+    </blockquote>
+    <p>
+        {{ product.feature_1 }}
+    </p>
+    <p>
+        {{ product.feature_2 }}
+    </p>
+    <p>
+        {{ product.feature_3 }}
+    </p>
     <!-- ##### Single Product Details Area End ##### -->
 
 {% endblock %}

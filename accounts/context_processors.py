@@ -1,8 +1,11 @@
 from .models import Cart, User  
+from products.models import Category
 
 def cart_processor(request):
 
     active = request.user.id
+
+    categories = Category.objects.order_by('category')
 
     if active is not None:
 
@@ -24,10 +27,13 @@ def cart_processor(request):
             'subtotal': subtotal,
             'delivery': delivery,
             'total': total,
+            'categories': categories,
         }
         return context
 
-    context = {}
+    context = {
+        'categories': categories
+    }
     return context
  
     

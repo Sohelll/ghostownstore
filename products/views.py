@@ -10,7 +10,7 @@ def index(request):
 
     # latest first
     # products = Product.objects.order_by('-list_date').filter(is_published=True)
-    products = Product.objects.order_by('list_date').filter(is_published=True)  #take all of them for now!
+    products = Product.objects.order_by('-list_date').filter(is_published=True)  #take all of them for now!
     count = len(products)   #number of products fetched
 
     paginator = Paginator(products, 6)

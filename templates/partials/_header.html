@@ -18,9 +18,19 @@
                 </div>
                 <!-- Nav Start -->
                 <div class="classynav">
-                    <ul>
+                    <ul>                        
                        <li><a href="{% url 'index' %}">Home</a></li>                     
-                        <li><a href="{% url 'products' %}">Shop</a></li> 
+                        <li><a href="{% url 'products' %}">Shop</a></li>
+                        <li><a href="#">Categories</a>
+                                <div class="megamenu">
+                                    <ul class="single-mega cn-col-4">
+                                        <li class="title"><a href="{% url 'products' %}">All</a></li>
+                                        {% for c in categories %}
+                                        <li><a href="{% url 'cat_wise' c.id %}">{{c.category}}</a></li>
+                                        {% endfor %}
+                                    </ul>                                   
+                                </div>
+                            </li> 
                         {% if user.is_authenticated %}                               
                         <li><a href="{% url 'checkout' user.id %}">Checkout</a></li>
                         {% else %}                                
@@ -43,7 +53,13 @@
         </nav>
 
         <!-- Header Meta Data -->
-        <div class="header-meta d-flex clearfix justify-content-end">
+        <div class="header-meta d-flex clearfix justify-content-end align-items-center">
+            <div class="px-3">
+                {% if user.is_authenticated %}
+                    Hi, {{ user.first_name }}
+                {% endif %}
+            </div>
+            
             <!-- Search Area -->
             <div class="search-area">
                 <form action="{% url 'search' %}" method='GET'>

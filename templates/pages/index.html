@@ -22,49 +22,8 @@
         </div>
     </section>
     <!-- ##### Welcome Area End ##### -->
-    
-    <!-- ##### Top Catagory Area Start ##### -->
-    <div class="top_catagory_area section-padding-80 clearfix">
-        <div class="container">
-            <div class="row justify-content-center">
-                {% for c in cat %}
-                    <!-- Single Catagory -->
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({{c.photo_main_1.url}});">
-                            <div class="catagory-content">
-                                <a href="{% url 'cat_wise' c.id %}">{{c.category}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <!-- ##### Top Catagory Area End ##### -->
-    
-    <!-- ##### CTA Area Start ##### -->
-    <div class="cta-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="cta-content bg-img background-overlay" style="background-image: url({% static 'img/bg-img/bg-5.jpg' %});">
-                        <div class="h-100 d-flex align-items-center justify-content-end">
-                            <div class="cta--text">
-                                <h6>-60%</h6>
-                                <h2>More Products</h2>
-                                <h2>are</h2>
-                                <a href="#" class="btn essence-btn">Coming Soon</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### CTA Area End ##### -->
-    
-    <!-- ##### New Arrivals Area Start ##### -->
+
+      <!-- ##### New Arrivals Area Start ##### -->
     <section class="new_arrivals_area section-padding-80 clearfix">
         <div class="container">
             <div class="row">
@@ -127,6 +86,49 @@
         </div>
     </section>
     <!-- ##### New Arrivals Area End ##### -->
+    
+    <!-- ##### Top Catagory Area Start ##### -->
+    <div class="top_catagory_area section-padding-80 clearfix">
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for c in cat %}
+                    <!-- Single Catagory -->
+                    <div class="col-12 col-sm-6 col-md-4 mb-2">
+                        <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url({{c.photo_main_1.url}});">
+                            <div class="catagory-content">
+                                <a href="{% url 'cat_wise' c.id %}">{{c.category}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- ##### Top Catagory Area End ##### -->
+    
+    <!-- ##### CTA Area Start ##### -->
+    <div class="cta-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cta-content bg-img background-overlay" style="background-image: url({% static 'img/bg-img/bg-5.jpg' %});">
+                        <div class="h-100 d-flex align-items-center justify-content-end">
+                            <div class="cta--text">
+                                <h6>-60%</h6>
+                                <h2>More Products</h2>
+                                <h2>are</h2>
+                                <a href="#" class="btn essence-btn">Coming Soon</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### CTA Area End ##### -->
+    
+  
     
     <!-- ##### Brands Area Start ##### -->
     <div class="brands-area d-flex align-items-center justify-content-between">
