@@ -80,7 +80,7 @@
                                     
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>{{ p.category }}</span>
+                                                <span><a href="{% url 'cat_wise' p.category.id %}">{{ p.category }}</a></span>
                                                 <a href="{% url 'product' p.id %}">
                                                     <h6>{{ p.title }}</h6>
                                                 </a>

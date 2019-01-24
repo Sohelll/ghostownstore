@@ -35,7 +35,7 @@
         <!-- Single Product Description -->
         <div class="col-md-7">
             <div class="single_product_desc clearfix">
-                <span>{{ product.category }}</span>
+                <span><a href="{% url 'cat_wise' product.category.id %}"> {{ product.category }}</a></span>
                 <h2>{{ product.title }}</h2>
                 <p class="product-price"><span id="old_price_cross" class="old-price"><span>&#8377;</span>{{ product.MRP | intcomma }}</span></span>
                     <span>&#8377;</span>{{ product.actual_price | intcomma }}</p>
